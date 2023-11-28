@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/fragmentoHome"
+        android:id="@+id/itemHome"
         android:title="Home"
         android:icon="@drawable/home"/>
 
     <item
-        android:id="@+id/fragmentoTextInputs"
+        android:id="@+id/itemTextInputs"
         android:title="TextInputs"
         android:icon="@drawable/edit_note"/>
 
     <item
-        android:id="@+id/fragmentoSearch"
+        android:id="@+id/itemSearch"
         android:title="Search"
         android:icon="@drawable/search"/>
 </menu>

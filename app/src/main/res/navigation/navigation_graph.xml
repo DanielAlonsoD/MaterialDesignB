@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/fragmentoHomeNav">
+    app:startDestination="@id/fragmentoHome">
 
     <fragment
-        android:id="@+id/fragmentoHomeNav"
+        android:id="@+id/fragmentoHome"
         android:name="com.example.materialdesignb.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home"/>
 
     <fragment
-        android:id="@+id/fragmentoTextInputsNav"
+        android:id="@+id/fragmentoTextInputs"
         android:name="com.example.materialdesignb.TextInputFragment"
         android:label="TextInput"
         tools:layout="@layout/fragment_text_input"/>
 
     <fragment
-        android:id="@+id/fragmentoSearchNav"
+        android:id="@+id/fragmentoSearch"
         android:name="com.example.materialdesignb.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search"/>
