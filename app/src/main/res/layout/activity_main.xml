@@ -8,32 +8,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/layoutTopAppBar"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/menu_navigation"
-            android:background="?attr/colorPrimary"
-            app:title="Top App Bar"
-            app:titleCentered="true"
-            app:titleTextColor="@android:color/white"
-            app:menu="@menu/menu_top_app_bar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/menu_navigation"
+        android:background="?attr/colorPrimary"
+        app:title="Top App Bar"
+        app:titleCentered="true"
+        app:titleTextColor="@android:color/white"
+        app:menu="@menu/menu_top_app_bar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <FrameLayout
         android:id="@+id/contenedor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigationBar"
-        android:layout_below="@id/layoutTopAppBar"/>
+        android:layout_below="@id/topAppBar"/>
 
     <fragment
         android:id="@+id/fragmentos"

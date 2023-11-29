@@ -23,7 +23,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener ,NavHost {
+public class MainActivity extends AppCompatActivity implements NavHost {
     private NavController navController;
 
     @Override
@@ -31,16 +31,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Esta parte declara el Top App Bar
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         setSupportActionBar(topAppBar);
 
+        //Aquí es dónde se debe insertar el Navigation Drawer, ya que es el icono izquierdo de la Top App Bar
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Has pulsado las 3 barras", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(v, "Has pulsado las 3 barras ", Snackbar.LENGTH_SHORT).show();
             }
         });
 
+        //Toda esta parte hasta el final del método es del Navigation Bar
         NavHostFragment fragmentos = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentos);
         navController = fragmentos.getNavController();
 
@@ -68,19 +71,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mostrarFragmento(new HomeFragment());
     }
 
+    //Parte del Top App Bar, aquí se declara el menú de las opciones del Top App Bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        getMenuInflater().inflate(R.menu.menu_top_app_bar, menu);
        return true;
     }
 
-    // Maneja las acciones del menú
+    /*Parte del Top App Bar, en esta parte dependiendo del item que el usuario seleccione el programa hará
+    una u otra acción*/
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
         boolean realizado = false;
         if (menuItem.getItemId()==R.id.itemMenuSelected) {
-            menuItem.setOnMenuItemClickListener((MenuItem.OnMenuItemClickListener) this);
-            return true;
+            //Toda esta parte hasta el final del if es el Menu de Selected
+            View view = findViewById(R.id.itemMenuSelected);
+            PopupMenu menu = new PopupMenu(this, view);
+            menu.getMenuInflater().inflate(R.menu.menu_selection, menu.getMenu());
+
+            menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (item.getItemId()==R.id.itemOpciones) {
+                        Intent actividadOpciones = new Intent(MainActivity.this, OpcionesActivity.class);
+                        startActivity(actividadOpciones);
+                        return true;
+                    } else {
+                        Intent actividadAcercaDe = new Intent(MainActivity.this, AcercaDeActivity.class);
+                        startActivity(actividadAcercaDe);
+                        return false;
+                    }
+                }
+            });
+
+            menu.show();
+            realizado = true;
         }
         return realizado;
     }
@@ -97,30 +122,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public NavController getNavController() {
         return navController;
-    }
-
-    @Override
-    public void onClick(View v) {
-        PopupMenu menuOpciones = new PopupMenu(MainActivity.this, getCurrentFocus());
-        menuOpciones.getMenuInflater().inflate(R.menu.menu_selection, menuOpciones.getMenu());
-
-        menuOpciones.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                boolean realizado = false;
-                if (item.getItemId()==R.id.itemOpciones) {
-                    Intent actividadOpciones = new Intent(MainActivity.this, OpcionesActivity.class);
-                    startActivity(actividadOpciones);
-                    realizado = true;
-                } else if (item.getItemId()==R.id.itemAcercaDe) {
-                    Intent actividadAcercaDe = new Intent(MainActivity.this, AcercaDeActivity.class);
-                    startActivity(actividadAcercaDe);
-                    realizado = true;
-                }
-                return realizado;
-            }
-        });
-
-        menuOpciones.show();
     }
 }
