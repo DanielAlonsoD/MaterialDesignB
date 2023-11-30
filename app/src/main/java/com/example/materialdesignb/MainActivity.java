@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavHost {
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Has pulsado las 3 barras ", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(v, "AHHH", Snackbar.LENGTH_SHORT).show();
             }
         });
 
