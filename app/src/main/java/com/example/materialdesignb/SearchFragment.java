@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.google.android.material.search.SearchBar;
 import com.google.android.material.snackbar.Snackbar;
 
 public class SearchFragment extends Fragment {
@@ -21,19 +22,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View elemento = inflater.inflate(R.layout.fragment_search, container, false);
 
-        SearchView buscador = elemento.findViewById(R.id.searchView);
-        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Snackbar.make(elemento, "Busqueda Enviada: " +query, Snackbar.LENGTH_SHORT).show();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+        SearchBar searchBar = (SearchBar) elemento.findViewById(R.id.searchBar);
 
         return elemento;
     }

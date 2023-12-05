@@ -7,11 +7,10 @@
     tools:context=".SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <SearchView
-        android:id="@+id/searchView"
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Buscar..."
-        app:iconifiedByDefault="false" />
+        android:hint="Buscar" />
 
 </FrameLayout>
