@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavHost;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavHost, Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        navController = Navigation.findNavController(this, R.id.fragmentos);
+
         //Esta parte declara el Top App Bar
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         setSupportActionBar(topAppBar);
@@ -55,31 +58,24 @@ public class MainActivity extends AppCompatActivity implements NavHost, Navigati
         });
 
         //Toda esta parte hasta el final del método es del Navigation Bar
-        NavHostFragment fragmentos = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentos);
-        navController = fragmentos.getNavController();
-
         BottomNavigationView navigationBar = findViewById(R.id.navigationBar);
         navigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 boolean realizado = false;
-                Fragment fragmentoSeleccionado = null;
                 if (item.getItemId() == R.id.itemHome) {
-                    fragmentoSeleccionado = new HomeFragment();
+                    navController.navigate(R.id.fragmentoHome);
                     realizado = true;
                 } else if (item.getItemId() == R.id.itemTextInputs) {
-                    fragmentoSeleccionado = new TextInputFragment();
+                    navController.navigate(R.id.fragmentoTextInputs);
                     realizado = true;
                 } else if (item.getItemId() == R.id.itemSearch) {
-                    fragmentoSeleccionado = new SearchFragment();
+                    navController.navigate(R.id.fragmentoSearch);
                     realizado = true;
                 }
-                mostrarFragmento(fragmentoSeleccionado);
                 return realizado;
             }
         });
-
-        mostrarFragmento(new HomeFragment());
     }
 
     //Parte del Top App Bar, aquí se declara el menú de las opciones del Top App Bar
@@ -121,14 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavHost, Navigati
         return realizado;
     }
 
-    private void mostrarFragmento(Fragment fragmento) {
-        if (fragmento != null) {
-            FragmentTransaction transaccion = getSupportFragmentManager().beginTransaction();
-            transaccion.replace(R.id.contenedor, fragmento);
-            transaccion.commit();
-        }
-    }
-
     @NonNull
     @Override
     public NavController getNavController() {
@@ -138,18 +126,16 @@ public class MainActivity extends AppCompatActivity implements NavHost, Navigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         boolean realizado = false;
-        Fragment fragmentoSeleccionado = null;
         if (item.getItemId() == R.id.itemHome) {
-            fragmentoSeleccionado = new HomeFragment();
+            navController.navigate(R.id.fragmentoHome);
             realizado = true;
         } else if (item.getItemId() == R.id.itemTextInputs) {
-            fragmentoSeleccionado = new TextInputFragment();
+            navController.navigate(R.id.fragmentoTextInputs);
             realizado = true;
         } else if (item.getItemId() == R.id.itemSearch) {
-            fragmentoSeleccionado = new SearchFragment();
+            navController.navigate(R.id.fragmentoSearch);
             realizado = true;
         }
-        mostrarFragmento(fragmentoSeleccionado);
         return realizado;
     }
 }
